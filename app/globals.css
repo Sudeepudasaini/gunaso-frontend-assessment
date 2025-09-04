@@ -85,3 +85,25 @@ body {
   border-color: #28a745;     
   color: white;              
 }
+/* Theme base styles: next-themes sets .light / .dark on <html> */
+html,
+body {
+  height: 100%;
+}
+
+/* Light theme defaults */
+html.light body {
+  background: #ffffff;
+  color: #0a0a0a;
+}
+
+/* Dark theme defaults */
+html.dark body {
+  background: #0b0b0b;
+  color: #f5f5f5;
+}
+
+/* Optional: make <main> fill width nicely */
+main {
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
