@@ -1,4 +1,12 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@use '@carbon/react/scss/reset';
+@use '@carbon/react/scss/theme';
+@use '@carbon/react/scss/themes' as themes with (
+  $theme: themes.$g10
+);
 
 :root {
   --background: #ffffff;
@@ -23,4 +31,57 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+.heading {
+  text-align: center;
+}
+
+.btn {
+  padding: 7px;
+  margin: 5px;
+  background-color: #6D6868;
+  color: #000000;
+  margin-bottom: 50px;
+}
+
+.box {
+  background-color: #D9D9D9;
+  color: #000000;
+  border: 2px solid #D9D9D9;
+  padding: 20px;
+  border-radius: 8px;
+  margin: 4px;
+}
+.container {
+  background-color: #D9D9D9;
+  border: 2px solid #D9D9D9;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.box-container {
+  position: relative;
+  top: 100px;
+}
+.footer {
+  display: flex;
+  position: absolute;
+  bottom: 200px;
+}
+.footer .link {
+  color: #000000;
+  text-decoration: none;
+  flex: 1;
+  text-align: center;
+  background-color: #D9D9D9;
+  border: 2px solid #D9D9D9;
+  padding: 10px;
+  margin: 4px;
+}
+
+.green-button {
+  background-color: #28a745; 
+  border-color: #28a745;     
+  color: white;              
 }
