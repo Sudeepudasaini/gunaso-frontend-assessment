@@ -20,7 +20,7 @@ export default function HomePage() {
       <p>This is my F0 setup page demonstrating theming.</p>
 
       <Button kind="primary" className="green-button" style={{ marginTop: "1rem" }}>
-        Carbon Button Test
+        Carbon Button Test click on light and dark button on right top
       </Button>
     </main>
   );
