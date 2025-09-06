@@ -3,40 +3,48 @@
 
 import React from "react";
 import { Button } from "@carbon/react";
-import ModeToggle from "./components/mode-toggle";
 import { useTranslation } from "react-i18next";
+
+import Header from "./components/Header";
+import Hero from "./components/Hero";
+import Stats from "./components/Stats";
+import FooterNav from "./components/FooterNav";
+
+
+import ModeToggle from "./components/mode-toggle";
+import LanguageSwitcher from "./components/language-switcher";
 
 export default function HomePage() {
   const { t } = useTranslation("common");
   const [mounted, setMounted] = React.useState(false);
-
-  React.useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) return null; 
+  React.useEffect(() => setMounted(true), []);
+  if (!mounted) return null;
 
   return (
-    <main style={{ padding: "2rem" }}>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginBottom: "1rem",
-        }}
-      >
-        <h1>{t("welcome")}</h1>
-        <ModeToggle />
+    <main className="min-h-screen flex flex-col has-mobile-footer">
+     
+      <div className="utility-bar">
+        <div className="utility-inner">
+          <div><LanguageSwitcher /></div>
+          <div><ModeToggle /></div>
+        </div>
       </div>
 
-      <p>{t("description")}</p>
+      <Header />
+      <Hero />
 
-      <Button kind="primary" className="green-button" style={{ marginTop: "1rem" }}>
-        {t("submit")}
-      </Button>
+      <section className="px-6 pt-4 pb-2">
+        <h1 className="text-xl font-semibold">{t("welcome")}</h1>
+        <p className="mt-1">{t("description")}</p>
+        <Button kind="primary" className="green-button mt-3">
+          {t("submit")}
+        </Button>
+      </section>
+
+      <Stats />
+      <div className="flex-1" />
+      <FooterNav />
     </main>
   );
 }
-
 

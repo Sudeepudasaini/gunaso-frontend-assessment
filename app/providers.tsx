@@ -1,17 +1,21 @@
+
 "use client";
 
-import { ThemeProvider } from "./components/theme-provider";
+import { ThemeProvider } from "next-themes";
 import { I18nextProvider } from "react-i18next";
-import i18n from "./i18n";
-import LanguageSwitcher from "./components/language-switcher";
+import i18n from "./i18n"; 
 
-export default function ClientProviders({ children }: { children: React.ReactNode }) {
+export default function ClientProviders({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <I18nextProvider i18n={i18n}>
-      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-        <LanguageSwitcher />
+    <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+      <I18nextProvider i18n={i18n}>
+       
         {children}
-      </ThemeProvider>
-    </I18nextProvider>
+      </I18nextProvider>
+    </ThemeProvider>
   );
 }
