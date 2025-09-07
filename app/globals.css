@@ -165,11 +165,11 @@ html.dark .footer-bar{ background:#6b7280; }
 .font-semibold { font-weight: 600; }
 
 
-.form-row { margin-bottom: 1rem; }          /* space between rows like Figma */
+.form-row { margin-bottom: 1rem; }          
 .grid { display: grid; }
 .gap-3 { gap: .75rem; }
 .text-lg { font-size: 1.125rem; }
 .font-semibold { font-weight: 600; }
 .mb-4 { margin-bottom: 1rem; }
 .min-h-screen { min-height: 100vh; }
-.has-mobile-footer { padding-bottom: 6rem; } /* leave space for your fixed footer */
+.has-mobile-footer { padding-bottom: 6rem; } 
