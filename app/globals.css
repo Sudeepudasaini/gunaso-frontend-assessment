@@ -153,3 +153,23 @@ html.dark .footer-bar{ background:#6b7280; }
   width:0; height:0; border-left:14px solid transparent; border-right:14px solid transparent;
   border-bottom:24px solid #595959;
 }
+
+
+/* helpers used above */
+.grid { display: grid; }
+.gap-2 { gap: .5rem; }
+.gap-3 { gap: .75rem; }
+.mb-2 { margin-bottom: .5rem; }
+.mb-4 { margin-bottom: 1rem; }
+.text-lg { font-size: 1.125rem; }
+.font-semibold { font-weight: 600; }
+
+
+.form-row { margin-bottom: 1rem; }          /* space between rows like Figma */
+.grid { display: grid; }
+.gap-3 { gap: .75rem; }
+.text-lg { font-size: 1.125rem; }
+.font-semibold { font-weight: 600; }
+.mb-4 { margin-bottom: 1rem; }
+.min-h-screen { min-height: 100vh; }
+.has-mobile-footer { padding-bottom: 6rem; } /* leave space for your fixed footer */
