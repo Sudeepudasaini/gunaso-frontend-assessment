@@ -1,5 +1,4 @@
 
-
 "use client";
 
 import * as React from "react";
@@ -43,7 +42,6 @@ export default function SubmitPage() {
     setForm(f => ({ ...f, attachments: list.map(f => f.name) }));
   };
 
-  
   const validate = () => {
     const e: Partial<Record<keyof FormState, string>> = {};
     if (!form.category) e.category = "Required";
@@ -65,27 +63,32 @@ export default function SubmitPage() {
     if (validate()) setOpen(true); 
   };
 
-const confirmAndSave = async () => {
-  setSaving(true);
-  try {
-    const res = await fetch("/api/grievances", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
-    });
-    if (!res.ok) throw new Error("Save failed");
-    const data = await res.json();
+  const confirmAndSave = async () => {
+    setSaving(true);
+    try {
+      const res = await fetch("/api/grievances", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) throw new Error("Save failed");
+      const data = await res.json();
 
-    
-    router.replace(`/submit/success/id?ticket=${encodeURIComponent(data.id)}`);
-  } catch (e) {
-    console.error(e);
-  } finally {
-    setSaving(false);
-    setOpen(false);
-  }
-};
+      try {
+        const existing = JSON.parse(localStorage.getItem("notifications") || "[]");
+        const note = { id: Date.now(), text: "Your grievance has been submitted. Check that out", ref: data.id };
+        const next = [note, ...(Array.isArray(existing) ? existing : [])];
+        localStorage.setItem("notifications", JSON.stringify(next));
+      } catch {}
 
+      router.replace(`/submit/success/id?ticket=${encodeURIComponent(data.id)}`);
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setSaving(false);
+      setOpen(false);
+    }
+  };
 
   const reset = () =>
     setForm({
@@ -103,9 +106,7 @@ const confirmAndSave = async () => {
     <main className="min-h-screen has-mobile-footer" style={{ padding: "1rem 1rem 6rem" }}>
       <h2 className="text-lg font-semibold mb-4">Submit Grievance</h2>
 
-      
       <form noValidate onSubmit={handleSubmit} className="grid gap-4" aria-describedby="submit-help">
-      
         <div className="form-row">
           <Select
             id="category"
@@ -120,7 +121,6 @@ const confirmAndSave = async () => {
           </Select>
         </div>
 
-       
         <div className="form-row grid gap-3" style={{ gridTemplateColumns: "1fr 1fr 1fr" }}>
           <TextInput id="district" labelText="District" value={form.district}
             invalid={!!errors.district} invalidText={errors.district}
@@ -133,10 +133,9 @@ const confirmAndSave = async () => {
             onChange={(e: any) => setForm(f => ({ ...f, wardNo: e.target.value }))} required />
         </div>
 
-        
         <div className="form-row grid gap-3" style={{ gridTemplateColumns: "2fr 1fr" }}>
           <DatePicker
-            datePickerType="single"       
+            datePickerType="single"
             dateFormat="Y-m-d"
             onChange={(dates: any) => {
               const d: Date | undefined = Array.isArray(dates) ? dates[0] : dates;
@@ -149,7 +148,6 @@ const confirmAndSave = async () => {
               placeholder="yyyy-mm-dd"
               invalid={!!errors.date}
               invalidText={errors.date}
-             
             />
           </DatePicker>
 
@@ -166,7 +164,6 @@ const confirmAndSave = async () => {
           </RadioButtonGroup>
         </div>
 
-       
         <div className="form-row">
           <TextArea id="desc" labelText="Describe Issue"
             value={form.description}
@@ -174,7 +171,6 @@ const confirmAndSave = async () => {
             onChange={(e: any) => setForm(f => ({ ...f, description: e.target.value }))} required />
         </div>
 
-        
         <div className="form-row">
           <label className="bx--label">Add Images/Attachments (Optional)</label>
           <FileUploader
@@ -186,7 +182,6 @@ const confirmAndSave = async () => {
           />
         </div>
 
-        
         <div className="form-row" style={{ display: "flex", gap: 12 }}>
           <Button kind="primary" type="submit">Submit</Button>
           <Button kind="secondary" type="button" onClick={reset}>Reset</Button>
@@ -197,7 +192,6 @@ const confirmAndSave = async () => {
         </p>
       </form>
 
-      
       <Modal
         open={open}
         modalHeading="Are you sure ?"
